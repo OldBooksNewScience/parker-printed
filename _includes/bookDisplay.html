@@ -1,0 +1,54 @@
+{% for book in site.books %}
+<header class="book-header">
+  <h1 class="book-title">{{ book.shelfmark }}</h1>
+  <p class="book-meta">{{ book.title }}{% if book.author %} · {{ book.author }}{% endif %}</p>
+</header>
+
+<article class="book-content">
+  <a href="http://hooke.lib.cam.ac.uk/cgi-bin/bib_seek.cgi?cat=collan&bib={{ book.newtonid }}">Catalogue Entry</a>
+
+    {% for page in book.pages %}
+    <div class="page">
+    <h3>{{ page.locator }}</h3>
+
+    {% if page.image %}
+    <img src="{{ site.baseurl }}/images/{{ page.image }}" class="page-image"/>
+    {% endif %}
+
+      {% for annotation in page.annotations %}
+
+      <h4>Annotation at {{ annotation.position | join: ', no. ' }}</h4>
+
+      {% if annotation.image %}
+      <img src="{{ site.baseurl }}/images/{{ annotation.image }}" class="annotation-image"/>
+      {% endif %}
+
+      {% if annotation.description %}
+
+      <h5>Description</h5>
+
+      {{ annotation.description | markdownify }}
+
+      {% endif %}
+
+      {% if annotation.transcription %}
+
+      <h5>Transcription</h5>
+
+      {{ annotation.transcription }}
+
+      {% endif %}
+
+      {% if annotation.translation %}
+
+      <h5>Translation</h5>
+
+      {{ annotation.translation }}
+
+      {% endif %}
+
+      {% endfor %}
+      </div>
+    {% endfor %}
+</article>
+{% endfor %}

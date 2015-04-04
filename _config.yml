@@ -1,0 +1,22 @@
+# Site settings
+title: "Parker’s Printed Books"
+description: >
+  This online catalogue allows users to search and browse descriptions of printed books from the Parker collection, with marginal annotations by Matthew Parker and his circle.
+baseurl: "/parker-printed" # the subpath of your site, e.g. /blog/
+url: "http://oldbooksnewscience.github.io" # the base hostname & protocol for your site
+
+# Build settings
+markdown: kramdown
+
+collections: 
+  books:
+    output: true
+    permalink: "/:path/"
+      
+defaults:
+  - scope:
+      path: ""
+      type: books
+    values:
+      layout: book
+
